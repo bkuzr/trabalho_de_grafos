@@ -10,23 +10,23 @@ public class Grafo {
 	}
 
 	public void adicionaVertice(Vertice v) {
-		// "Adiciona um novo vértice em G"
+		// "Adiciona um novo vï¿½rtice em G"
 	}
 
 	public void removeVertice(Vertice v) {
-		// "Remove um  vértice de G, juntamente com todas as conexões"
+		// "Remove um  vï¿½rtice de G, juntamente com todas as conexï¿½es"
 		v.limpaVertice();
 		_arrayVertice.remove(v);
 	}
 
 	public void conecta(Vertice v1, Vertice v2) {
-		// "Conecta os vértices v1 e v2 em G"
+		// "Conecta os vï¿½rtices v1 e v2 em G"
 		v1.adicionaAdjacente(v2);
 		v2.adicionaAdjacente(v1);
 	}
 
 	public void desconecta(Vertice v1, Vertice v2) {
-		// "Desconecta os vértices v1 e v2 em G"
+		// "Desconecta os vï¿½rtices v1 e v2 em G"
 		v1.removeAdjacente(v2);
 		v2.removeAdjacente(v1);
 	}
@@ -36,31 +36,31 @@ public class Grafo {
 	}
 
 	public ArrayList<Vertice> vertices() {
-		// "Retorna um conjunto contendo os vértices de G"
+		// "Retorna um conjunto contendo os vï¿½rtices de G"
 		return _arrayVertice;
 	}
 
 	public Vertice umVertice() {
-		// "Retorna um vértice qualquer de G"
+		// "Retorna um vï¿½rtice qualquer de G"
 		int random = (int) Math.random() * (_ordem - 1);
 		System.out.println(random);
 		return _arrayVertice.get((random + 1));
 	}
 
 	public ArrayList<Vertice> adjacentes(Vertice v) {
-		// "Retorna um conjunto contendo os vértices adjacentes a v em G"
+		// "Retorna um conjunto contendo os vï¿½rtices adjacentes a v em G"
 		return v.getAdjacentes();
 	}
 
 	public int grau(Vertice v) {
-		// "Retorna o número de vértices adjacentes a v em G"
+		// "Retorna o nï¿½mero de vï¿½rtices adjacentes a v em G"
 		return v.getGrau();
 	}
 
 	// ACOES DERIVADAS
 
 	public boolean eRegular() {
-		// "Verifica se todos os vértices de G possuem o mesmo grau"
+		// "Verifica se todos os vï¿½rtices de G possuem o mesmo grau"
 		int grauPrimeiroVertice = _arrayVertice.get(0)
 				.getGrau();
 		for (Vertice v : _arrayVertice) {
@@ -71,8 +71,8 @@ public class Grafo {
 	}
 
 	public boolean eCompleto() {
-		// "Verifica se cada vértice de G está conectado
-		// a todos os outros vértices"
+		// "Verifica se cada vï¿½rtice de G estï¿½ conectado
+		// a todos os outros vï¿½rtices"
 		for(int i = 0; i < _arrayVertice.size();i++){
 			if(_arrayVertice.get(i).getGrau() != (_ordem -1))
 			return false;
@@ -81,8 +81,8 @@ public class Grafo {
 	}
 
 	public ArrayList<Vertice> fechoTransitivo(Vertice v) {
-		// "Retorna um conjunto contendo todos os vértices de G que
-		// são transitivamente alcancáveis partindo-se de v"
+		// "Retorna um conjunto contendo todos os vï¿½rtices de G que
+		// sï¿½o transitivamente alcancï¿½veis partindo-se de v"
 		for(int i = 0; i < v.getAdjacentes().size(); i++){
 			
 		}
@@ -91,13 +91,30 @@ public class Grafo {
 
 	public boolean eConexo() {
 		// "Verifica se existe pelo menos um caminho que entre
-		// cada par de vértices de G"
+		// cada par de vï¿½rtices de G"
+		return false;
+	}
+	
+	public boolean haCiclo(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
+		// "Verifica se ha ciclos em G"		
+		//marca visita (por seguranca acabei usando tanto lista como os marcadores) Gabriel
+		visitados.add(v);		
+		v.visitar();
+		int k = v.getAdjacentes().size();
+		for(int i = 0; i < k; i++) {
+			if(visitados.contains(v.getAdjacentes.().get(i)) && v.getAdjacentes.().get(i) != va) {
+					return true;
+			}else{
+				if(haCiclo(v.getAdjacentes.().get(i), v, visitados))
+					return true;
+			}
+		}		
 		return false;
 	}
 
 	public boolean eArvore() {
-		// "Verifica se não há ciclos em G"
-
+		// "Verifica se nï¿½o hï¿½ ciclos em G"
+		
 		return false;
 	}
 
