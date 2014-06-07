@@ -8,7 +8,7 @@ public class Vertice {
 	private boolean _visitado;
 	
 	public Vertice(String valor) {
-		_valor = "";
+		_valor = valor;
 		_grau = 0;
 		_adjacentes = new ArrayList<Vertice>();
 		_visitado = false;

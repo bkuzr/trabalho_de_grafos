@@ -3,25 +3,24 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Programa de grafos");
+		mensagem("Programa de grafos");
 		Grafo g = new Grafo();
 		Scanner ent = new Scanner(System.in);
-		mostraMenu();
+		mensagem(ConstantesRespostas.menu);
 
 		int esc = ent.nextInt();
 		while (esc != 0) {
 			switch (esc) {
 			case 1:
-				System.out.println(ConstantesRespostas.adicionaVertice);
-				g.adicionaVertice(new Vertice(ent.next()));
+				mensagem(ConstantesRespostas.adicionaVertice);
+				String valor = ent.next();
+				g.adicionaVertice(new Vertice(valor));
 				break;
 			case 2:
-				System.out.println(ConstantesRespostas.removeVertice);
-				System.out.println(ConstantesRespostas.duvidaRemoveVertice);
+				mensagem(ConstantesRespostas.removeVertice);
+				mensagem(ConstantesRespostas.duvidaRemoveVertice);
 				if (ent.next().equalsIgnoreCase("s") || ent.next().equalsIgnoreCase("sim")) {
-					for (Vertice v : g.vertices())
-						System.out.println(v.getValor() + "\n");
-					System.out.println("\n");
+					g.mostrarVertices();
 				}
 
 				String vARetirar = ent.next();
@@ -36,43 +35,87 @@ public class Main {
 				}
 				break;
 			case 3:
+				mensagem(ConstantesRespostas.conectaVertice);
+				String valor1 = ent.next();
+				String valor2 = ent.next();
+				Vertice  vertice1, vertice2;
+				
+				
 				break;
 			case 4:
-				System.out.println(ConstantesRespostas.ordemGrafo + g.ordem());
 				break;
 			case 5:
+				mensagem(ConstantesRespostas.ordemGrafo + g.ordem());
 				break;
 			case 6:
-				System.out.println(ConstantesRespostas.verticeRandomico + g.umVertice().getValor());
+				mensagem(ConstantesRespostas.mostrarVertices);
+				g.mostrarVertices();
 				break;
 			case 7:
+				mensagem(ConstantesRespostas.mostrarVerticeQualquer + g.umVertice().getValor());
 				break;
 			case 8:
+				mensagem(ConstantesRespostas.mostrarVerticesAdjacentesPedido);
+				String valorAdj = ent.next();
+				for(int i = 0; i < g.vertices().size(); i++){
+					if(g.vertices().get(i).getValor() == valorAdj){
+						mensagem(ConstantesRespostas.mostrarVerticesAdjacentesResposta + g.adjacentes(g.vertices().get(i))); //RETORNAR CADA VALOR INDIVIDUALMENTE
+					}else{
+						mensagem(ConstantesRespostas.erroVerticeIncorreto);
+					}
+						
+				}
+				
 				break;
 			case 9:
+				mensagem(ConstantesRespostas.mostrarVerticesAdjacentesPedido);
+				String valorGrau = ent.next();
+				for(int i = 0; i < g.vertices().size(); i++){
+					if(g.vertices().get(i).getValor() == valorGrau){
+						mensagem(ConstantesRespostas.grauVerticeResposta + g.vertices().get(i).getGrau());
+					}else{
+						mensagem(ConstantesRespostas.erroVerticeIncorreto);
+					}
+						
+				}
 				break;
 			case 10:
+				if (g.eRegular()) {
+					mensagem(ConstantesRespostas.grafoERegular);
+				}
+				mensagem(ConstantesRespostas.grafoNaoRegular);
 				break;
 			case 11:
+				if (g.eCompleto()) {
+					mensagem(ConstantesRespostas.grafoECompleto);
+				}
+				mensagem(ConstantesRespostas.grafoNaoCompleto);
 				break;
 			case 12:
+
 				break;
 			case 13:
+				if (g.eConexo()) {
+					mensagem(ConstantesRespostas.grafoEConexo);
+				}
+				mensagem(ConstantesRespostas.grafoNaoConexo);
+				break;
+			case 14:
+				if (g.eArvore()) {
+					mensagem(ConstantesRespostas.grafoEArvore);
+				}
+				mensagem(ConstantesRespostas.grafoNaoArvore);
 				break;
 			}
+			mensagem(ConstantesRespostas.menu);
 			esc = ent.nextInt();
 		}
 		System.out.println("Finalizado");
 
 	}
 
-	private static void mostraMenu() {
-		System.out.println("Escolha o que voce deseja fazer:1-Adicionar vertice\n2-Remover vertice\n"
-				+ "3-Conectar dois vertices\n4-Desconectar dois vertices\n5-Calcular ordem\n6-Mostrar vertices\n"
-				+ "7-Mostrar um vertice qualquer do grafo\n8-Mostrar os vertices adjacentes de um vertice do grafo\n"
-				+ "9-Retornar o grau de um vertice do grafo\n10-Verificar se o grafo é regular\n"
-				+ "11-Verificar se o grafo é completo\n12-Verificar o fecho transitivo de um vertice\n"
-				+ "13-Verificar se o grafo é conexo\n14-Verificar se o grafo é uma arvore\n0-Fechar");
+	private static void mensagem(String mensagem) {
+		System.out.println(mensagem + "\n");
 	}
 
 }

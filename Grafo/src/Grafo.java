@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class Grafo {
 
 	private ArrayList<Vertice> _arrayVertice;
-	private int _ordem;
 
 	public Grafo() {
-		_ordem = 10;
+		_arrayVertice =  new ArrayList<Vertice>();
 	}
 
 	public void adicionaVertice(Vertice v) {
 		// "Adiciona um novo v�rtice em G"
+		_arrayVertice.add(v);
 	}
 
 	public void removeVertice(Vertice v) {
@@ -32,7 +32,7 @@ public class Grafo {
 	}
 
 	public int ordem() {
-		return _ordem;
+		return _arrayVertice.size();
 	}
 
 	public ArrayList<Vertice> vertices() {
@@ -42,7 +42,7 @@ public class Grafo {
 
 	public Vertice umVertice() {
 		// "Retorna um v�rtice qualquer de G"
-		int random = (int) Math.random() * (_ordem - 1);
+		int random = (int) Math.random() * (_arrayVertice.size() - 1);
 		System.out.println(random);
 		return _arrayVertice.get((random + 1));
 	}
@@ -74,7 +74,7 @@ public class Grafo {
 		// "Verifica se cada v�rtice de G est� conectado
 		// a todos os outros v�rtices"
 		for(int i = 0; i < _arrayVertice.size();i++){
-			if(_arrayVertice.get(i).getGrau() != (_ordem -1))
+			if(_arrayVertice.get(i).getGrau() != (_arrayVertice.size() -1))
 			return false;
 		 }		
 		return true;
@@ -92,6 +92,7 @@ public class Grafo {
 	public boolean eConexo() {
 		// "Verifica se existe pelo menos um caminho que entre
 		// cada par de v�rtices de G"
+		
 		return false;
 	}
 	
@@ -115,7 +116,16 @@ public class Grafo {
 	public boolean eArvore() {
 		// "Verifica se n�o h� ciclos em G"
 		
+//		return !haCiclo(v, va, visitados);
+		
 		return false;
 	}
+	
+	public void mostrarVertices(){
+		for(Vertice v : _arrayVertice)
+			System.out.println(v.getValor());
+		System.out.println("\n");
+	}
+	
 
 }
