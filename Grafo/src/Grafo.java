@@ -102,10 +102,10 @@ public class Grafo {
 		v.visitar();
 		int k = v.getAdjacentes().size();
 		for(int i = 0; i < k; i++) {
-			if(visitados.contains(v.getAdjacentes.().get(i)) && v.getAdjacentes.().get(i) != va) {
+			if(visitados.contains(v.getAdjacentes().get(i)) && v.getAdjacentes().get(i) != va) {
 					return true;
 			}else{
-				if(haCiclo(v.getAdjacentes.().get(i), v, visitados))
+				if(haCiclo(v.getAdjacentes().get(i), v, visitados))
 					return true;
 			}
 		}		
