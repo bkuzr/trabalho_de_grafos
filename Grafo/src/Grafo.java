@@ -5,7 +5,7 @@ public class Grafo {
 	private ArrayList<Vertice> _arrayVertice;
 
 	public Grafo() {
-		_arrayVertice =  new ArrayList<Vertice>();
+		_arrayVertice = new ArrayList<Vertice>();
 	}
 
 	public void adicionaVertice(Vertice v) {
@@ -61,8 +61,7 @@ public class Grafo {
 
 	public boolean eRegular() {
 		// "Verifica se todos os v�rtices de G possuem o mesmo grau"
-		int grauPrimeiroVertice = _arrayVertice.get(0)
-				.getGrau();
+		int grauPrimeiroVertice = _arrayVertice.get(0).getGrau();
 		for (Vertice v : _arrayVertice) {
 			if (v.getGrau() != grauPrimeiroVertice)
 				return false;
@@ -73,18 +72,18 @@ public class Grafo {
 	public boolean eCompleto() {
 		// "Verifica se cada v�rtice de G est� conectado
 		// a todos os outros v�rtices"
-		for(int i = 0; i < _arrayVertice.size();i++){
-			if(_arrayVertice.get(i).getGrau() != (_arrayVertice.size() -1))
-			return false;
-		 }		
+		for (int i = 0; i < _arrayVertice.size(); i++) {
+			if (_arrayVertice.get(i).getGrau() != (_arrayVertice.size() - 1))
+				return false;
+		}
 		return true;
 	}
 
 	public ArrayList<Vertice> fechoTransitivo(Vertice v) {
 		// "Retorna um conjunto contendo todos os v�rtices de G que
 		// s�o transitivamente alcanc�veis partindo-se de v"
-		for(int i = 0; i < v.getAdjacentes().size(); i++){
-			
+		for (int i = 0; i < v.getAdjacentes().size(); i++) {
+
 		}
 		return null;
 	}
@@ -92,40 +91,52 @@ public class Grafo {
 	public boolean eConexo() {
 		// "Verifica se existe pelo menos um caminho que entre
 		// cada par de v�rtices de G"
-		
-		return false;
-	}
-	
-	public boolean haCiclo(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
-		// "Verifica se ha ciclos em G"		
-		//marca visita (por seguranca acabei usando tanto lista como os marcadores) Gabriel
-		visitados.add(v);		
-		v.visitar();
-		int k = v.getAdjacentes().size();
-		for(int i = 0; i < k; i++) {
-			if(visitados.contains(v.getAdjacentes().get(i)) && v.getAdjacentes().get(i) != va) {
-					return true;
-			}else{
-				if(haCiclo(v.getAdjacentes().get(i), v, visitados))
-					return true;
-			}
-		}		
+
 		return false;
 	}
 
-	public boolean eArvore() {
-		// "Verifica se n�o h� ciclos em G"
-		
-//		return !haCiclo(v, va, visitados);
-		
+	public boolean haCiclo(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
+		// "Verifica se ha ciclos em G"
+		// marca visita (por seguranca acabei usando tanto lista como os
+		// marcadores) Gabriel
+		visitados.add(v);
+		v.visitar();
+		int k = v.getAdjacentes().size();
+		for (int i = 0; i < k; i++) {
+			if (visitados.contains(v.getAdjacentes().get(i)) && v.getAdjacentes().get(i) != va) {
+				return true;
+			} else {
+				if (haCiclo(v.getAdjacentes().get(i), v, visitados))
+					return true;
+			}
+		}
+		// se falso, deve-se checar se existe algum componente conexo nao
+		// "visitado"
+		k = 0;
+		boolean visita = true;
+		while (k < _arrayVertice.size() && visita == true) {
+			if (visitados.contains(_arrayVertice.get(k)) == false) {
+				visita = false;
+				haCiclo(_arrayVertice.get(k), _arrayVertice.get(k), visitados);
+			}
+			k++;
+		}
 		return false;
 	}
-	
-	public void mostrarVertices(){
-		for(Vertice v : _arrayVertice)
+
+	public boolean eArvore(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
+		// "Verifica se nao ha ciclos em G"
+		// return !haCiclo(v, va, visitados);
+		if (haCiclo(v, va, visitados) == false)
+			return true;
+
+		return false;
+	}
+
+	public void mostrarVertices() {
+		for (Vertice v : _arrayVertice)
 			System.out.println(v.getValor());
 		System.out.println("\n");
 	}
-	
 
 }
