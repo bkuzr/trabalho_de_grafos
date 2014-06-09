@@ -38,12 +38,44 @@ public class Main {
 				mensagem(ConstantesRespostas.conectaVertice);
 				String valor1 = ent.next();
 				String valor2 = ent.next();
-				Vertice  vertice1, vertice2;
-				
+				Vertice vertice2 = null;
+				Vertice vertice1 = null;
+				boolean tru = false;
+				int ki = 0;
+				while (ki < g.vertices().size() && tru == false) {
+					ki++;
+					if(g.vertices().get(ki).getValor() == valor1)
+						vertice1 = g.vertices().get(ki);
+					if(g.vertices().get(ki).getValor() == valor2)
+						vertice2 = g.vertices().get(ki);
+					if(vertice1 != null && vertice2 != null) {
+						g.conecta(vertice1, vertice2);
+						tru = true;
+					}
+				}	
 				
 				break;
 			case 4:
+				mensagem(ConstantesRespostas.desconectarVertice);
+				String val2 = ent.next();
+				String val1 = ent.next();
+				Vertice vertic2 = null;
+				Vertice vertic1 = null;
+				boolean t = false;
+				int k = 0;
+				while (k < g.vertices().size() && t == false) {
+					k++;
+					if(g.vertices().get(k).getValor() ==val1)
+						vertic1 = g.vertices().get(k);
+					if(g.vertices().get(k).getValor() == val2)
+						vertic2 = g.vertices().get(k);
+					if(vertic1 != null && vertic2 != null) {
+						g.desconecta(vertic1, vertic2);
+						t = true;
+					}
+				}				
 				break;
+
 			case 5:
 				mensagem(ConstantesRespostas.ordemGrafo + g.ordem());
 				break;
@@ -101,10 +133,10 @@ public class Main {
 				mensagem(ConstantesRespostas.grafoNaoConexo);
 				break;
 			case 14:
-				if (g.eArvore()) {
-					mensagem(ConstantesRespostas.grafoEArvore);
-				}
-				mensagem(ConstantesRespostas.grafoNaoArvore);
+//				if (g.eArvore()) {
+//					mensagem(ConstantesRespostas.grafoEArvore);
+//				}
+//				mensagem(ConstantesRespostas.grafoNaoArvore);
 				break;
 			}
 			mensagem(ConstantesRespostas.menu);

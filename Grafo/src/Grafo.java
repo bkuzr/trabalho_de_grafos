@@ -96,30 +96,28 @@ public class Grafo {
 	}
 
 	public boolean haCiclo(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
-		// "Verifica se ha ciclos em G"
-		// marca visita (por seguranca acabei usando tanto lista como os
-		// marcadores) Gabriel
-		visitados.add(v);
+		// "Verifica se ha ciclos em G"		
+		//marca visita (por seguranca acabei usando tanto lista como os marcadores) Gabriel
+		visitados.add(v);		
 		v.visitar();
 		int k = v.getAdjacentes().size();
-		for (int i = 0; i < k; i++) {
-			if (visitados.contains(v.getAdjacentes().get(i)) && v.getAdjacentes().get(i) != va) {
-				return true;
-			} else {
-				if (haCiclo(v.getAdjacentes().get(i), v, visitados))
+		for(int i = 0; i < k; i++) {
+			if(visitados.contains(v.getAdjacentes().get(i)) && v.getAdjacentes().get(i) != va) {
+					return true;
+			}else{
+				if(haCiclo(v.getAdjacentes().get(i), v, visitados))
 					return true;
 			}
-		}
-		// se falso, deve-se checar se existe algum componente conexo nao
-		// "visitado"
-		k = 0;
+		}		
+		//se falso, deve-se checar se existe algum componente conexo nao "visitado"
+		int k1 = 0;
 		boolean visita = true;
-		while (k < _arrayVertice.size() && visita == true) {
-			if (visitados.contains(_arrayVertice.get(k)) == false) {
+		while(k1 < _arrayVertice.size() && visita == true){			
+			if (visitados.contains(_arrayVertice.get(k1)) == false) {
 				visita = false;
-				haCiclo(_arrayVertice.get(k), _arrayVertice.get(k), visitados);
+				haCiclo(_arrayVertice.get(k1), _arrayVertice.get(k1), visitados);
 			}
-			k++;
+			k1++;
 		}
 		return false;
 	}
