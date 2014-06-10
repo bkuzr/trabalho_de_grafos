@@ -113,14 +113,18 @@ public class Grafo {
 	
 	public boolean eConexo() {
 		// "Verifica se existe pelo menos um caminho que entre
-		// cada par de v�rtices de G"
+		// cada par de vértices de G"
 		Vertice v = umVertice(); //pega um vertice aleatorio para percorrer
-		int capacidadeMaxima = _arrayVertice.size();
-		ArrayList<Vertice> visitados = new ArrayList<Vertice>(capacidadeMaxima);
-		visitados.add(v);
-		
-		return false;
+		for(int i = 0; i < _arrayVertice.size(); i++){
+			if(fechoTransitivo(v).contains(_arrayVertice.get(i)) == false){
+				//se algum dos vertices do grafo não estiver contido no fecho transitivo de v
+				//retorna falso para eConexo
+				return false;
+			}
+		}
+		return true;
 	}
+	
 	public boolean haCiclo(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
 		// "Verifica se ha ciclos em G"		
 		//marca visita (por seguranca acabei usando tanto lista como os marcadores) Gabriel
