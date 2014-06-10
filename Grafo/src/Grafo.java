@@ -79,22 +79,48 @@ public class Grafo {
 		return true;
 	}
 
+	public void desmarcaVertices() {
+		// marca todos vertices do grafo como nao percorridos/visitados
+		for(int i = 0; i < _arrayVertice.size();i++){
+			_arrayVertice.get(i).visitar(false);
+		 }				
+	}
+	
+	public void percorreGrafo(Vertice v) {
+		// Percorre o grafo a partir de um vértice e vai marcando os vertices ja visitados
+		//Espera-se que todos estejam marcados como nao percorridos ao inicio
+		for(int i = 0; i < adjacentes(v).size(); i++) {
+			if (adjacentes(v).get(i).getSituacao() == false){
+				adjacentes(v).get(i).visitar(true);
+				percorreGrafo(adjacentes(v).get(i));
+			}				
+		}
+	}
+	
 	public ArrayList<Vertice> fechoTransitivo(Vertice v) {
 		// "Retorna um conjunto contendo todos os v�rtices de G que
 		// s�o transitivamente alcanc�veis partindo-se de v"
-		for (int i = 0; i < v.getAdjacentes().size(); i++) {
-
+		desmarcaVertices(); //garante que nenhum vertice esteja marcado como visitado		
+		ArrayList<Vertice> fecho = new ArrayList<Vertice>(_arrayVertice.size()); //arraylist base 
+		percorreGrafo(v); 
+		for(int i = 0; i < _arrayVertice.size(); i++) {
+			if (_arrayVertice.get(i).getSituacao() == true){ //testa se vertice ja foi percorrido
+				fecho.add(v);				
+			}				
 		}
-		return null;
+		return fecho;
 	}
-
+	
 	public boolean eConexo() {
 		// "Verifica se existe pelo menos um caminho que entre
 		// cada par de v�rtices de G"
-
+		Vertice v = umVertice(); //pega um vertice aleatorio para percorrer
+		int capacidadeMaxima = _arrayVertice.size();
+		ArrayList<Vertice> visitados = new ArrayList<Vertice>(capacidadeMaxima);
+		visitados.add(v);
+		
 		return false;
 	}
-
 	public boolean haCiclo(Vertice v, Vertice va, ArrayList<Vertice> visitados) {
 		// "Verifica se ha ciclos em G"		
 		//marca visita (por seguranca acabei usando tanto lista como os marcadores) Gabriel
