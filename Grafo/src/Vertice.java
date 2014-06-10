@@ -30,10 +30,10 @@ public class Vertice {
 		_adjacentes.add(v);
 	}
 	public boolean removeAdjacente(Vertice v){
-		return _adjacentes.remove(v); //se v nao é encontrado retorna false
+		return _adjacentes.remove(v); //se v nao ï¿½ encontrado retorna false
 	}
-	public void visitar(){
-		_visitado = true;
+	public void visitar(boolean verdade){
+		_visitado = verdade;
 	}
 	public void limpaVertice(){
 		_valor = "";
