@@ -32,8 +32,8 @@ public class Vertice {
 	public boolean removeAdjacente(Vertice v){
 		return _adjacentes.remove(v); //se v nao � encontrado retorna false
 	}
-	public void visitar(boolean verdade){
-		_visitado = verdade;
+	public void visitar(boolean visitar){
+		_visitado = visitar;
 	}
 	public void limpaVertice(){
 		_valor = "";

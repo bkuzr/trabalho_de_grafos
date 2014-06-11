@@ -129,7 +129,7 @@ public class Grafo {
 		// "Verifica se ha ciclos em G"		
 		//marca visita (por seguranca acabei usando tanto lista como os marcadores) Gabriel
 		visitados.add(v);		
-		v.visitar();
+		v.visitar(true);
 		int k = v.getAdjacentes().size();
 		for(int i = 0; i < k; i++) {
 			if(visitados.contains(v.getAdjacentes().get(i)) && v.getAdjacentes().get(i) != va) {
